@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace DVLD
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void toolStripMenuPeople_Click(object sender, EventArgs e)
+        {
+            Form frm = new PeopleForm();   
+            frm.ShowDialog();
         }
     }
 }

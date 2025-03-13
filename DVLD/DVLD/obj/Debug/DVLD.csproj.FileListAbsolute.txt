@@ -1,0 +1,12 @@
+E:\Repo\DVLD\DVLD\DVLD\bin\Debug\DVLD.exe.config
+E:\Repo\DVLD\DVLD\DVLD\bin\Debug\DVLD.exe
+E:\Repo\DVLD\DVLD\DVLD\bin\Debug\DVLD.pdb
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.csproj.AssemblyReference.cache
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.MainForm.resources
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.Properties.Resources.resources
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.UserControlPoeple.resources
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.csproj.GenerateResource.cache
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.csproj.CoreCompileInputs.cache
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.exe
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.pdb
+E:\Repo\DVLD\DVLD\DVLD\obj\Debug\DVLD.PeopleForm.resources
