@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BAL;
 
 namespace DVLD
 {
@@ -15,6 +16,15 @@ namespace DVLD
         public PeopleForm()
         {
             InitializeComponent();
+        }
+        private void _RefreshPersonList()
+        {
+            dgvAllPeople.DataSource = clsPeopleB.GetAllContact(); 
+        }
+
+        private void PeopleForm_Load(object sender, EventArgs e)
+        {
+            _RefreshPersonList();
         }
     }
 }

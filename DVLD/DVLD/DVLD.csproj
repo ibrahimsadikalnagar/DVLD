@@ -131,5 +131,11 @@
   <ItemGroup>
     <None Include="Resources\Icons-Land-Vista-People-Groups-Meeting-Dark.2561.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BAL\BAL.csproj">
+      <Project>{b5963b44-22c1-4fb5-a850-6e82806a7f0c}</Project>
+      <Name>BAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

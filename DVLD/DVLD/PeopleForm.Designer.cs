@@ -32,12 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PeopleForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvAllPeople = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPeopleTitle = new System.Windows.Forms.Label();
+            this.buttonAddPeople = new System.Windows.Forms.Button();
+            this.labelFilter = new System.Windows.Forms.Label();
+            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAllPeople)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -48,24 +51,26 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dgvAllPeople);
             this.groupBox1.Location = new System.Drawing.Point(22, 273);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1103, 294);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
-            // dataGridView1
+            // dgvAllPeople
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 26;
-            this.dataGridView1.Size = new System.Drawing.Size(1097, 271);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvAllPeople.AllowUserToAddRows = false;
+            this.dgvAllPeople.AllowUserToDeleteRows = false;
+            this.dgvAllPeople.AllowUserToOrderColumns = true;
+            this.dgvAllPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAllPeople.Location = new System.Drawing.Point(3, 20);
+            this.dgvAllPeople.Name = "dgvAllPeople";
+            this.dgvAllPeople.ReadOnly = true;
+            this.dgvAllPeople.RowHeadersWidth = 51;
+            this.dgvAllPeople.RowTemplate.Height = 26;
+            this.dgvAllPeople.Size = new System.Drawing.Size(1097, 271);
+            this.dgvAllPeople.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -85,9 +90,36 @@
             this.lblPeopleTitle.ForeColor = System.Drawing.Color.Maroon;
             this.lblPeopleTitle.Location = new System.Drawing.Point(441, 183);
             this.lblPeopleTitle.Name = "lblPeopleTitle";
-            this.lblPeopleTitle.Size = new System.Drawing.Size(275, 41);
+            this.lblPeopleTitle.Size = new System.Drawing.Size(271, 40);
             this.lblPeopleTitle.TabIndex = 2;
             this.lblPeopleTitle.Text = "Manage People";
+            // 
+            // buttonAddPeople
+            // 
+            this.buttonAddPeople.Location = new System.Drawing.Point(1041, 223);
+            this.buttonAddPeople.Name = "buttonAddPeople";
+            this.buttonAddPeople.Size = new System.Drawing.Size(75, 54);
+            this.buttonAddPeople.TabIndex = 3;
+            this.buttonAddPeople.Text = "Add Person";
+            this.buttonAddPeople.UseVisualStyleBackColor = true;
+            // 
+            // labelFilter
+            // 
+            this.labelFilter.AutoSize = true;
+            this.labelFilter.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFilter.Location = new System.Drawing.Point(21, 253);
+            this.labelFilter.Name = "labelFilter";
+            this.labelFilter.Size = new System.Drawing.Size(80, 21);
+            this.labelFilter.TabIndex = 4;
+            this.labelFilter.Text = "Filter by";
+            // 
+            // comboBoxFilter
+            // 
+            this.comboBoxFilter.FormattingEnabled = true;
+            this.comboBoxFilter.Location = new System.Drawing.Point(107, 253);
+            this.comboBoxFilter.Name = "comboBoxFilter";
+            this.comboBoxFilter.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxFilter.TabIndex = 5;
             // 
             // PeopleForm
             // 
@@ -95,14 +127,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1128, 579);
+            this.Controls.Add(this.comboBoxFilter);
+            this.Controls.Add(this.labelFilter);
+            this.Controls.Add(this.buttonAddPeople);
             this.Controls.Add(this.lblPeopleTitle);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.DoubleBuffered = true;
             this.Name = "PeopleForm";
             this.Text = "PeopleForm";
+            this.Load += new System.EventHandler(this.PeopleForm_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAllPeople)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,9 +148,12 @@
 
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvAllPeople;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblPeopleTitle;
+        private System.Windows.Forms.Button buttonAddPeople;
+        private System.Windows.Forms.Label labelFilter;
+        private System.Windows.Forms.ComboBox comboBoxFilter;
     }
 }
