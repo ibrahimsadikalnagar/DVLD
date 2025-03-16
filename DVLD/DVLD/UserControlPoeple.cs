@@ -16,5 +16,18 @@ namespace DVLD
         {
             InitializeComponent();
         }
+        public  ComboBox ComboBoxCountry
+        {
+            get { return comboBoxCountry; }
+        }
+        private void labelFirstName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

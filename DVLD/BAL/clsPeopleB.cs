@@ -14,6 +14,10 @@ namespace BAL
         {
             return clsPeopleD.GetAllContact();
         }
+        public static DataTable GetAllCountries()
+        {
+            return clsPeopleD.GetAllCountries();
+        }
             
     }
 }

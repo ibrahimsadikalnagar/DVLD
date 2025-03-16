@@ -26,5 +26,11 @@ namespace DVLD
         {
             _RefreshPersonList();
         }
+
+        private void buttonAddPeople_Click(object sender, EventArgs e)
+        {
+            Form form = new AddEditPoepleForm(-1);
+            form.ShowDialog();
+        }
     }
 }
