@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Net.Configuration;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,7 +123,90 @@ namespace DAL
             }
 
             return isFound;
+
         }
+        public static int GetCountryID(string FirstName, string SecondName
+            , string thirdName, string LastName, string NationalNo
+            , DateTime DateOfBirth, byte Gender, string Phone, string Email,
+             string Country, string Address,  string ImagePath)
+        {
+            int ContactID = -1;
+
+           SqlConnection conn = new SqlConnection(DataConnection.ConnectionString);
+            string GetIdQuery = "select CountryID from Countries where CountryName =@Country"; 
+            SqlCommand cmd = new SqlCommand(GetIdQuery, conn);
+            cmd.Parameters.AddWithValue("@Country", Country);
+            try
+            {
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result == null)
+                {
+                    return -1;
+                }
+                ContactID = (int)result;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ContactID;
+
+        }
+        public static int AddAllContact(string FirstName, string SecondName
+            , string thirdName, string LastName, string NationalNo
+            , DateTime DateOfBirth, byte Gender, string Phone, string Email,
+             string Country, string Address, string ImagePath)
+        {
+            int ContactID = -1;
+            SqlConnection Conn = new SqlConnection(DataConnection.ConnectionString);
+            string query = @"INSERT INTO People (NationalNo, FirstName, SecondName, ThirdName,
+LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
+VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName,
+@LastName, @DateOfBirth, @Gendor, @Address, @Phone, @Email,
+        (SELECT CountryID FROM Countries WHERE CountryName = @Country), NULL)";
+
+            SqlCommand cmd = new SqlCommand(@query, Conn);
+            cmd.Parameters.AddWithValue ("@FirstName", FirstName);
+            cmd.Parameters.AddWithValue("@SecondName", SecondName); 
+            cmd.Parameters.AddWithValue("@ThirdName" , thirdName);
+            cmd.Parameters.AddWithValue("@LastName" , LastName);
+            cmd.Parameters.AddWithValue("@NationalNo" , NationalNo);
+            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth); 
+            cmd.Parameters.AddWithValue("@Gender" , Gender);
+            cmd.Parameters.AddWithValue("@Address",Address);    
+            cmd.Parameters.AddWithValue("@Phone" , Phone);
+            cmd.Parameters.AddWithValue("Email" , Email);
+            try
+            {
+                Conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                {
+                    ContactID = insertedID;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                Conn.Close();
+
+            }
+            return ContactID;
+
+
+            }
+            
+
+
+        }
+
 
     }
 }

@@ -76,6 +76,16 @@ namespace DVLD
             userControlPoeple1.ComboBoxCountry.SelectedText = _Contact.CountryName;
           
             userControlPoeple1.listBoxAddress.Items.Add(_Contact.Address );
+            if(_Contact.Gendor == 0)
+            {
+                userControlPoeple1.radioButtonMale.Checked = true;
+                userControlPoeple1.radioButtonFemal.Checked = false; 
+            }
+            else
+            {
+                userControlPoeple1.radioButtonFemal.Checked= true;
+                userControlPoeple1 .radioButtonMale.Checked = false;    
+            }
 
 
         }
