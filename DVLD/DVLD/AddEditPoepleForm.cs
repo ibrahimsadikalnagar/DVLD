@@ -19,6 +19,7 @@ namespace DVLD
         enum enMode { AddNewMode = 0 , EditNewMode = 1 };
         private enMode _Mode;
          int _ContactID;
+        clsPeopleB _Contact; 
         public AddEditPoepleForm(int ContactID)
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace DVLD
                 _Mode = enMode.AddNewMode;
             }
             else
-            {
+            { 
+
                 _Mode = enMode.EditNewMode;
             }
         }
@@ -45,11 +47,35 @@ namespace DVLD
         private void _LoadData()
         {
             _FillAllCountriesComboBox();
-            userControlPoeple1.ComboBoxCountry.SelectedIndex = 123;
+            
             if( _Mode == enMode.AddNewMode )
             {
                 lblTitlePoeple.Text = "Add New Person "; 
+                _Contact = new clsPeopleB();
+                userControlPoeple1.ComboBoxCountry.SelectedIndex = 123;
+                return; 
+                
             }
+            _Contact = clsPeopleB.Find(_ContactID);
+            if (_Contact == null)
+            {
+                MessageBox.Show("This form will close because its emty");
+                this.Close();
+                return;
+            }
+            lblTitlePoeple.Text = "Edit People ID "; 
+           LblID.Text = _ContactID.ToString();  
+            userControlPoeple1.textBoxFirstName.Text = _Contact.FirstName;
+            userControlPoeple1.textBoxSecondName.Text = _Contact.SecondName;
+            userControlPoeple1.textBoxthirdName.Text = _Contact.ThirdName;
+            userControlPoeple1.textBoxLastName.Text = _Contact.LastName;
+            userControlPoeple1.textBoxNationalty.Text = _Contact.NationalId;
+            userControlPoeple1.dateTimePickerDateBirthPeople.Value = _Contact.DateOfBith; 
+            userControlPoeple1.textBoxPhone.Text = _Contact.Phone;
+            userControlPoeple1.textBoxEmail.Text = _Contact.Email;
+            userControlPoeple1.ComboBoxCountry.SelectedText = _Contact.CountryName;
+          
+            userControlPoeple1.listBoxAddress.Items.Add(_Contact.Address );
 
 
         }

@@ -31,6 +31,7 @@
             this.userControlPoeple1 = new DVLD.UserControlPoeple();
             this.lblTitlePoeple = new System.Windows.Forms.Label();
             this.labelPersonID = new System.Windows.Forms.Label();
+            this.LblID = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // userControlPoeple1
@@ -62,11 +63,22 @@
             this.labelPersonID.TabIndex = 2;
             this.labelPersonID.Text = "Person ID:";
             // 
+            // LblID
+            // 
+            this.LblID.AutoSize = true;
+            this.LblID.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblID.Location = new System.Drawing.Point(140, 104);
+            this.LblID.Name = "LblID";
+            this.LblID.Size = new System.Drawing.Size(28, 24);
+            this.LblID.TabIndex = 3;
+            this.LblID.Text = "??";
+            // 
             // AddEditPoepleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 651);
+            this.Controls.Add(this.LblID);
             this.Controls.Add(this.labelPersonID);
             this.Controls.Add(this.lblTitlePoeple);
             this.Controls.Add(this.userControlPoeple1);
@@ -83,5 +95,6 @@
         private UserControlPoeple userControlPoeple1;
         private System.Windows.Forms.Label lblTitlePoeple;
         private System.Windows.Forms.Label labelPersonID;
+        private System.Windows.Forms.Label LblID;
     }
 }

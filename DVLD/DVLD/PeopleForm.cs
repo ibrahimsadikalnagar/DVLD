@@ -32,5 +32,13 @@ namespace DVLD
             Form form = new AddEditPoepleForm(-1);
             form.ShowDialog();
         }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddEditPoepleForm frm = new AddEditPoepleForm((int)dgvAllPeople.CurrentRow.Cells[0].Value);
+                frm.ShowDialog();
+            _RefreshPersonList(); 
+
+        }
     }
 }
