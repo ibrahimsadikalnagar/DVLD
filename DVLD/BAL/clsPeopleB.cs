@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace BAL
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public string NationalId { get; set; }
-        public DateTime DateOfBith {  get; set; }
+        public DateTime DateOfBirth {  get; set; }
         public string Address { get; set; }
         public byte Gendor {  get; set; }
         public string CountryName { get; set; }
@@ -35,7 +36,7 @@ namespace BAL
             ThirdName = "";
             LastName = "";
             NationalId = ""; 
-            DateOfBith = DateTime.Now;
+            DateOfBirth = DateTime.Now;
             Email = "";
             Phone = "";
             Address = "";
@@ -54,7 +55,7 @@ namespace BAL
             ThirdName = thirdName;
             LastName = lastName;
             NationalId = nationalId;
-            DateOfBith = dateOfBith;
+            DateOfBirth = dateOfBith;
             Address = address;
             Gendor = gendor;
             CountryName = countryName;
@@ -91,6 +92,19 @@ namespace BAL
         {
             return clsPeopleD.GetAllCountries();
         }
+        public  bool AddAllPeopleAndGetIDLastNewRecord()
+        {
+
+            this.PeopleId = clsPeopleD.AddAllContactModified(this.FirstName, this.SecondName, this.ThirdName
+                   , this.LastName, this.NationalId, this.DateOfBirth,
+                   this.Address, this.Gendor, this.CountryName, this.ImagePath, this.Email, this.Phone);
+
+            return (this.PeopleId != -1);
             
+
+
+
+        }
+
     }
 }

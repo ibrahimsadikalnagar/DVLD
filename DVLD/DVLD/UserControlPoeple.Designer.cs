@@ -46,7 +46,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxCountry = new System.Windows.Forms.ComboBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.listBoxAddress = new System.Windows.Forms.ListBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.textBoxLastName = new System.Windows.Forms.TextBox();
@@ -55,6 +54,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBoxPeople = new System.Windows.Forms.PictureBox();
+            this.richTextBoxAddress = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPeople)).BeginInit();
             this.SuspendLayout();
             // 
@@ -220,15 +220,6 @@
             this.textBoxEmail.Size = new System.Drawing.Size(172, 24);
             this.textBoxEmail.TabIndex = 9;
             // 
-            // listBoxAddress
-            // 
-            this.listBoxAddress.FormattingEnabled = true;
-            this.listBoxAddress.ItemHeight = 16;
-            this.listBoxAddress.Location = new System.Drawing.Point(156, 302);
-            this.listBoxAddress.Name = "listBoxAddress";
-            this.listBoxAddress.Size = new System.Drawing.Size(534, 116);
-            this.listBoxAddress.TabIndex = 11;
-            // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(395, 436);
@@ -304,10 +295,19 @@
             this.pictureBoxPeople.TabIndex = 22;
             this.pictureBoxPeople.TabStop = false;
             // 
+            // richTextBoxAddress
+            // 
+            this.richTextBoxAddress.Location = new System.Drawing.Point(149, 306);
+            this.richTextBoxAddress.Name = "richTextBoxAddress";
+            this.richTextBoxAddress.Size = new System.Drawing.Size(540, 96);
+            this.richTextBoxAddress.TabIndex = 28;
+            this.richTextBoxAddress.Text = "";
+            // 
             // UserControlPoeple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.richTextBoxAddress);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -316,7 +316,6 @@
             this.Controls.Add(this.pictureBoxPeople);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.listBoxAddress);
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.comboBoxCountry);
             this.Controls.Add(this.label4);
@@ -370,7 +369,7 @@
         public System.Windows.Forms.TextBox textBoxPhone;
         public System.Windows.Forms.ComboBox comboBoxCountry;
         public System.Windows.Forms.TextBox textBoxEmail;
-        public System.Windows.Forms.ListBox listBoxAddress;
         public System.Windows.Forms.TextBox textBoxLastName;
+        public System.Windows.Forms.RichTextBox richTextBoxAddress;
     }
 }

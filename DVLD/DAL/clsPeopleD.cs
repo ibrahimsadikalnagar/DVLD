@@ -19,23 +19,23 @@ namespace DAL
         {
             DataTable dt = new DataTable();
             SqlConnection conn = new SqlConnection(DataConnection.ConnectionString);
-            string query = "Select * from People"; 
+            string query = "Select * from People";
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
                 conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader(); 
-                if(reader.HasRows)
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    dt.Load(reader); 
+                    dt.Load(reader);
                 }
-                reader.Close(); 
+                reader.Close();
             }
-            catch (Exception ex) 
-                {
+            catch (Exception ex)
+            {
 
-                }
-             finally
+            }
+            finally
             {
                 conn.Close();
             }
@@ -69,16 +69,16 @@ namespace DAL
 
 
         }
-        public static bool GetContactByID(int id , ref string FirstName , ref string SecondName
-            , ref string thirdName , ref string LastName , ref string NationalNo 
-            ,ref DateTime DateOfBirth , ref byte Gender , ref string Phone , ref string Email , 
-            ref string Country , ref string Address , ref string ImagePath )
+        public static bool GetContactByID(int id, ref string FirstName, ref string SecondName
+            , ref string thirdName, ref string LastName, ref string NationalNo
+            , ref DateTime DateOfBirth, ref byte Gender, ref string Phone, ref string Email,
+            ref string Country, ref string Address, ref string ImagePath)
         {
-            bool isFound  = false;
+            bool isFound = false;
             SqlConnection conn = new SqlConnection(DataConnection.ConnectionString);
             string query = "Select * from vw_PeopleWithCountry where PersonID = @id";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@id" ,id);
+            cmd.Parameters.AddWithValue("@id", id);
             try
             {
                 conn.Open();
@@ -128,12 +128,12 @@ namespace DAL
         public static int GetCountryID(string FirstName, string SecondName
             , string thirdName, string LastName, string NationalNo
             , DateTime DateOfBirth, byte Gender, string Phone, string Email,
-             string Country, string Address,  string ImagePath)
+             string Country, string Address, string ImagePath)
         {
             int ContactID = -1;
 
-           SqlConnection conn = new SqlConnection(DataConnection.ConnectionString);
-            string GetIdQuery = "select CountryID from Countries where CountryName =@Country"; 
+            SqlConnection conn = new SqlConnection(DataConnection.ConnectionString);
+            string GetIdQuery = "select CountryID from Countries where CountryName =@Country";
             SqlCommand cmd = new SqlCommand(GetIdQuery, conn);
             cmd.Parameters.AddWithValue("@Country", Country);
             try
@@ -158,9 +158,9 @@ namespace DAL
 
         }
         public static int AddAllContact(string FirstName, string SecondName
-            , string thirdName, string LastName, string NationalNo
-            , DateTime DateOfBirth, byte Gender, string Phone, string Email,
-             string Country, string Address, string ImagePath)
+        , string thirdName, string LastName, string NationalNo
+        , DateTime DateOfBirth, string Address, byte Gender, string CountryName, string ImagePath,
+             string Email, string Phone)
         {
             int ContactID = -1;
             SqlConnection Conn = new SqlConnection(DataConnection.ConnectionString);
@@ -168,19 +168,21 @@ namespace DAL
 LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
 VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName,
 @LastName, @DateOfBirth, @Gendor, @Address, @Phone, @Email,
-        (SELECT CountryID FROM Countries WHERE CountryName = @Country), NULL)";
+        (SELECT CountryID FROM Countries WHERE CountryName = @Country), @ImagePath)";
 
             SqlCommand cmd = new SqlCommand(@query, Conn);
-            cmd.Parameters.AddWithValue ("@FirstName", FirstName);
-            cmd.Parameters.AddWithValue("@SecondName", SecondName); 
-            cmd.Parameters.AddWithValue("@ThirdName" , thirdName);
-            cmd.Parameters.AddWithValue("@LastName" , LastName);
-            cmd.Parameters.AddWithValue("@NationalNo" , NationalNo);
-            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth); 
-            cmd.Parameters.AddWithValue("@Gender" , Gender);
-            cmd.Parameters.AddWithValue("@Address",Address);    
-            cmd.Parameters.AddWithValue("@Phone" , Phone);
-            cmd.Parameters.AddWithValue("Email" , Email);
+            cmd.Parameters.AddWithValue("@FirstName", FirstName);
+            cmd.Parameters.AddWithValue("@SecondName", SecondName);
+            cmd.Parameters.AddWithValue("@ThirdName", thirdName);
+            cmd.Parameters.AddWithValue("@LastName", LastName);
+            cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
+            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+            cmd.Parameters.AddWithValue("@Gendor", Gender);
+            cmd.Parameters.AddWithValue("@Address", Address);
+            cmd.Parameters.AddWithValue("@Phone", Phone);
+            cmd.Parameters.AddWithValue("@Email", Email);
+            cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+            cmd.Parameters.AddWithValue("@Country", CountryName);
             try
             {
                 Conn.Open();
@@ -201,12 +203,67 @@ VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName,
             return ContactID;
 
 
-            }
-            
+
+
 
 
         }
 
 
+
+        public static int AddAllContactModified(string FirstName, string SecondName,
+    string thirdName, string LastName, string NationalNo,
+    DateTime DateOfBirth, string Address, byte Gender, string CountryName, string ImagePath,
+    string Email, string Phone)
+        {
+            int ContactID = -1;
+
+            string query = @"
+    INSERT INTO People (NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
+    OUTPUT INSERTED.PersonID
+    VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth, @Gendor, @Address, @Phone, @Email,
+            (SELECT  CountryID FROM Countries WHERE CountryName = @Country), @ImagePath)";
+
+            using (SqlConnection Conn = new SqlConnection(DataConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, Conn))
+                {
+                    cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                    cmd.Parameters.AddWithValue("@SecondName", SecondName);
+                    cmd.Parameters.AddWithValue("@ThirdName", thirdName);
+                    cmd.Parameters.AddWithValue("@LastName", LastName);
+                    cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
+                    cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                    cmd.Parameters.AddWithValue("@Gendor", Gender); // Fixed column name
+                    cmd.Parameters.AddWithValue("@Address", Address);
+                    cmd.Parameters.AddWithValue("@Phone", Phone);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+                    cmd.Parameters.AddWithValue("@Country", CountryName);
+
+                    try
+                    {
+                        Conn.Open();
+                        object result = cmd.ExecuteScalar(); // Using ExecuteScalar() for OUTPUT INSERTED.PersonID
+                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                        {
+                            ContactID = insertedID;
+                        }
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        Console.WriteLine("SQL Error: " + sqlEx.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("General Error: " + ex.Message);
+                    }
+                } // SqlCommand is disposed here
+            } // SqlConnection is disposed here
+
+            return ContactID;
+        }
+
     }
+
 }

@@ -70,12 +70,12 @@ namespace DVLD
             userControlPoeple1.textBoxthirdName.Text = _Contact.ThirdName;
             userControlPoeple1.textBoxLastName.Text = _Contact.LastName;
             userControlPoeple1.textBoxNationalty.Text = _Contact.NationalId;
-            userControlPoeple1.dateTimePickerDateBirthPeople.Value = _Contact.DateOfBith; 
+            userControlPoeple1.dateTimePickerDateBirthPeople.Value = _Contact.DateOfBirth; 
             userControlPoeple1.textBoxPhone.Text = _Contact.Phone;
             userControlPoeple1.textBoxEmail.Text = _Contact.Email;
             userControlPoeple1.ComboBoxCountry.SelectedText = _Contact.CountryName;
           
-            userControlPoeple1.listBoxAddress.Items.Add(_Contact.Address );
+            userControlPoeple1.richTextBoxAddress.Text   = _Contact.Address;
             if(_Contact.Gendor == 0)
             {
                 userControlPoeple1.radioButtonMale.Checked = true;
